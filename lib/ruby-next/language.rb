@@ -70,7 +70,7 @@ module RubyNext
         @watch_dirs
       end
 
-      attr_accessor :rewriters, :text_rewriters
+      attr_accessor :rewriters
 
       attr_accessor :strategy
 
@@ -186,7 +186,7 @@ module RubyNext
 
       def text_rewrite(source, rewriters:, using:, context:)
         rewriters.inject(source) do |src, rewriter|
-          rewriter.new(context).safe_rewrite(src)
+          rewriter.new(context).rewrite(src)
         end.then do |new_source|
           next source unless context.dirty?
 
@@ -199,7 +199,6 @@ module RubyNext
     end
 
     self.rewriters = []
-    self.text_rewriters = []
     self.watch_dirs = []
     self.include_patterns = %w[app lib spec test].map { |path| File.join(Dir.pwd, path, "*.rb") }
     self.exclude_patterns = %w[vendor/bundle].map { |path| File.join(Dir.pwd, path, "*") }
