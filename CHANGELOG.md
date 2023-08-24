@@ -2,7 +2,7 @@
 
 ## master
 
-- Add text rewriters. ([@palkan][])
+- Add text rewriters and `--import-rewriter` option to `nextify`. ([@palkan][])
 
 - Stop testing Ruby <2.3. ([@palkan][])
 
